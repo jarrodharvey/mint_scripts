@@ -15,4 +15,9 @@ do
     elif [[ $line == *"type 1 (EV_KEY), code 315 (BTN_START), value 0"* ]]; then
         echo "actions.speech.toggle(False)" | /home/jarrod/.talon/bin/repl
     fi
+    if [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 1"* ]]; then
+        xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' -1.0
+    elif [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 0"* ]]; then
+        xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' 1.0
+    fi
 done
