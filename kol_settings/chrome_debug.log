@@ -1,0 +1,9 @@
+[935602:935602:1107/003825.789635:WARNING:chrome_main_delegate.cc(613)] This is Chrome version 118.0.5993.88 (not a warning)
+[935602:935602:1107/003825.832182:WARNING:policy_logger.cc(148)] :components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc(88) Could not create policy manager as CBCM is not enabled.
+[935602:935602:1107/003825.846698:WARNING:chrome_browser_main_extra_parts_linux.cc(102)] This is not a Wayland session.  Falling back to X11. If you need to run Chrome on Wayland using some embedded compositor, e. g., Weston, please specify Wayland as your preferred Ozone platform, or use --ozone-platform=wayland.
+[935602:935602:1107/003825.944623:ERROR:policy_logger.cc(154)] :components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc(163) Cloud management controller initialization aborted as CBCM is not enabled.
+[935602:935602:1107/003825.951599:WARNING:account_consistency_mode_manager.cc(73)] Desktop Identity Consistency cannot be enabled as no OAuth client ID and client secret have been configured.
+[935602:935602:1107/003826.088184:WARNING:bluez_dbus_manager.cc(247)] Floss manager not present, cannot set Floss enable/disable.
+[935648:935648:1107/003826.177680:WARNING:sandbox_linux.cc(393)] InitializeSandbox() called with multiple threads in process gpu-process.
+[935602:935602:1107/003828.723638:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o", source: https://www.kingdomofloathing.com/login.php?loginid=e4190645f4ad4cb2baf4643fe66d91a1 (0)
+[935602:935602:1107/003938.975912:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

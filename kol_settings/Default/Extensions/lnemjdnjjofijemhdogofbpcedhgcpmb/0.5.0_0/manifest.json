@@ -1,0 +1,72 @@
+{
+   "action": {
+      "default_icon": {
+         "48": "icon48.58c42810.png"
+      },
+      "default_title": "Rango"
+   },
+   "background": {
+      "service_worker": "background.c37f66b3.js"
+   },
+   "commands": {
+      "disable-hints": {
+         "description": "Disable hints"
+      },
+      "enable-hints": {
+         "description": "Enable hints"
+      },
+      "get-talon-request": {
+         "description": "Get the talon request",
+         "suggested_key": {
+            "default": "Ctrl+Shift+Insert",
+            "mac": "MacCtrl+Shift+Insert"
+         }
+      },
+      "get-talon-request-alternative": {
+         "description": "Get the talon request (alternative)",
+         "suggested_key": {
+            "default": "Ctrl+Shift+3",
+            "mac": "MacCtrl+Shift+3"
+         }
+      },
+      "toggle-hints": {
+         "description": "Toggle hints",
+         "suggested_key": {
+            "default": "Ctrl+Shift+Space",
+            "mac": "MacCtrl+Shift+Space"
+         }
+      },
+      "toggle-keyboard-clicking": {
+         "description": "Toggle keyboard clicking",
+         "suggested_key": {
+            "default": "Ctrl+Shift+5",
+            "mac": "MacCtrl+Shift+5"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "css": [ "tippy.a99cb889.css", "content.262e3410.css" ],
+      "js": [ "content.65d0fa3e.js" ],
+      "match_about_blank": true,
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Extension that allows you to interact with webpages and the browser using your voice and talon or your keyboard",
+   "homepage_url": "https://github.com/david-tejada/rango",
+   "icons": {
+      "128": "icon128.77d0e41d.png",
+      "48": "icon48.58c42810.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnVhrOb3QwB/J3131nB4CNIxn/EIrxYoncMURRwttm4zVjX3E70eudL1xNb3f0BHM+KMtAMcRF1T6Jn3LFDvN4PeBw29adb19tgVh0tU25Hh5V1xIDdqVDgx106c9R6wTahi5gJmkoj7rFrwGos9QoE7v9KZLFfo6Zt8VhT0qaynGPqYgNotzpFTnutv41ON32Cg6eHk7wB+AYdfsLSA5XOOWrsKvyL/Oy74vC2eXkqSkQFJ8WWJKA408+vTECVa8SypL8kYxi1UbjR6mrOnMHpe+n5s8X15LB0/wLbCM+BefvOLRLx2Di7xefT5ip2aARCi0H9InahqXofHHv5ldyQIDAQAB",
+   "manifest_version": 3,
+   "minimum_chrome_version": "109",
+   "name": "Rango",
+   "options_ui": {
+      "open_in_tab": true,
+      "page": "settings.ca092c74.html"
+   },
+   "permissions": [ "storage", "activeTab", "clipboardRead", "clipboardWrite", "notifications", "webNavigation", "offscreen", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.5.0"
+}
