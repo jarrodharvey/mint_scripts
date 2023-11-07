@@ -1,3 +1,5 @@
-2023/11/07-00:38:25.966 4 Reusing MANIFEST /home/jarrod/mint_scripts/kol_settings/Default/Local Storage/leveldb/MANIFEST-000001
-2023/11/07-00:38:25.967 4 Recovering log #3
-2023/11/07-00:38:25.967 4 Reusing old log /home/jarrod/mint_scripts/kol_settings/Default/Local Storage/leveldb/000003.log 
+2023/11/07-02:21:07.515 4 Reusing MANIFEST /home/jarrod/mint_scripts/kol_settings/Default/Local Storage/leveldb/MANIFEST-000001
+2023/11/07-02:21:07.516 4 Recovering log #3
+2023/11/07-02:21:07.517 4 Level-0 table #3: started
+2023/11/07-02:21:07.520 4 Level-0 table #3: 21736 bytes OK
+2023/11/07-02:21:07.523 4 Delete type=0 #3

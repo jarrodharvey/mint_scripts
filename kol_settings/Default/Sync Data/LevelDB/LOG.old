@@ -1,3 +1,3 @@
-2023/11/07-00:24:33.653 e373e Reusing MANIFEST /home/jarrod/mint_scripts/kol_settings/Default/Sync Data/LevelDB/MANIFEST-000001
-2023/11/07-00:24:33.653 e373e Recovering log #3
-2023/11/07-00:24:33.653 e373e Reusing old log /home/jarrod/mint_scripts/kol_settings/Default/Sync Data/LevelDB/000003.log 
+2023/11/07-02:01:51.533 f8886 Reusing MANIFEST /home/jarrod/mint_scripts/kol_settings/Default/Sync Data/LevelDB/MANIFEST-000001
+2023/11/07-02:01:51.534 f8886 Recovering log #3
+2023/11/07-02:01:51.534 f8886 Reusing old log /home/jarrod/mint_scripts/kol_settings/Default/Sync Data/LevelDB/000003.log 

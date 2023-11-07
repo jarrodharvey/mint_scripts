@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from evdev import InputDevice, list_devices, categorize, ecodes
 import threading
 import os
+import traceback
 
 # Define the path for the user data directory
 user_data_dir = "/home/jarrod/mint_scripts/kol_settings"  # Replace with your desired path
@@ -44,13 +45,12 @@ DEVICE_PATH = find_device_path("Microsoft X-Box Adaptive Controller")
 if DEVICE_PATH is None:
     raise Exception("Could not find the device path for 'Microsoft X-Box Adaptive Controller'")
 
-# Function to find and click a button with a given keyword
 def click_keyword(keywords):
     while getattr(threading.currentThread(), "do_run", True):
         for keyword in keywords:
             try:
-                # Wait up to 5 seconds for an element with the keyword to appear
-                element = WebDriverWait(browser, 5).until(
+                # Wait up to 10 seconds for an element with the keyword to appear
+                element = WebDriverWait(browser, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{keyword}')]"))
                 )
                 element.click()
@@ -75,7 +75,7 @@ def monitor_input(device_path, keywords):
                 click_thread.join()  # Wait for the thread to finish
 
 # Start the input monitoring in a separate thread with a list of keywords
-keywords = ["attack", "Play"]  # Add your list of keywords here
+keywords = ["Adventure", "Play"]  # Add your list of keywords here
 input_thread = threading.Thread(target=monitor_input, args=(DEVICE_PATH, keywords))
 input_thread.start()
 
