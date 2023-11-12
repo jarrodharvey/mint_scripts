@@ -4,7 +4,7 @@
 execute_command_loop() {
     while true; do
         python3 click_word.py
-        sleep 7
+        sleep 4
     done
 }
 
