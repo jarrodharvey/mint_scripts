@@ -1,10 +1,25 @@
 #!/bin/bash
 
+# Variable to store the PID of the background process
+pid=""
+
+# Function to clean up background process
+cleanup() {
+    if [ ! -z "$pid" ]; then
+        echo "Terminating background process..."
+        kill $pid
+        pid=""
+    fi
+}
+
+# Set trap to call cleanup function on script exit
+trap cleanup EXIT
+
 # Function to start the command execution loop
 execute_command_loop() {
     while true; do
         python3 click_word.py
-        sleep 4
+        sleep 4    
     done
 }
 
@@ -24,7 +39,8 @@ command_loop_pid=0
 # Handle script exit and interrupts to kill the command loop if it's running
 trap '[[ $command_loop_pid -ne 0 ]] && kill $command_loop_pid' EXIT INT
 
-sudo evtest "$device" | while read line
+# Grab the device exclusively, so its events don't go to the system
+sudo evtest --grab "$device" | while read line
 do
     if [[ $line == *"type 3 (EV_ABS), code 1 (ABS_Y), value 32767"* ]]; then
         /home/jarrod/mint_scripts/move_cursor.sh -x 300 1000 
@@ -33,13 +49,42 @@ do
     fi
     if [[ $line == *"type 1 (EV_KEY), code 315 (BTN_START), value 1"* ]]; then
         echo "actions.speech.toggle(True)" | /home/jarrod/.talon/bin/repl
+        echo "mimic('game mode')" | /home/jarrod/.talon/bin/repl
     elif [[ $line == *"type 1 (EV_KEY), code 315 (BTN_START), value 0"* ]]; then
+        echo "mimic('command mode')" | /home/jarrod/.talon/bin/repl
         echo "actions.speech.toggle(False)" | /home/jarrod/.talon/bin/repl
     fi
     if [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 1"* ]]; then
-        xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' -1.0
+        #xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' -1.0
+        xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed' -1.0
     elif [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 0"* ]]; then
-        xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' 1.0
+        #xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' 1.0
+        xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed' 1.0
+    fi
+
+    if [[ $line == *"type 1 (EV_KEY), code 305 (BTN_EAST), value 1"* ]]; then
+        # Start pressing enter every two seconds
+        if [ -z "$pid" ]; then
+            # Start a background process
+            (
+                while true; do
+                    # Simulate pressing 'Enter'. Use 'xdotool' for GUI applications or 'input' for terminal
+                    xdotool key Return  # For GUI applications
+                    # input keyevent 66  # For terminal applications, may require root or specific permissions
+                    sleep 2  # Wait for 2 seconds before the next press
+                done
+            ) &
+            # Store the PID of the background process
+            pid=$!
+        fi
+    elif [[ $line == *"type 1 (EV_KEY), code 305 (BTN_EAST), value 0"* ]]; then
+        # Stop pressing enter
+        if [ ! -z "$pid" ]; then
+            # Kill the background process
+            kill $pid
+            # Clear the PID variable
+            pid=""
+        fi
     fi
 
     # Check for btn_north press and release events
