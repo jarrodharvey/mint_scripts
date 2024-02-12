@@ -62,23 +62,32 @@ do
         xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed' 1.0
     fi
 
-    if [[ $line == *"type 1 (EV_KEY), code 305 (BTN_EAST), value 1"* ]]; then
+    if [[ $line == *"type 3 (EV_ABS), code 17 (ABS_HAT0Y), value 1"* ]]; then
+
+        echo "actions.user.game_stop()" | /home/jarrod/.talon/bin/repl
+        REPEAT_FILE="/home/jarrod/mint_scripts/repeat.json"
+        # Extracting the 'button' and 'wait_time' values using jq
+        BUTTON=$(jq -r '.button' "$REPEAT_FILE")
+        WAIT_TIME=$(jq -r '.wait_time' "$REPEAT_FILE")
+        echo "actions.user.hud_publish_content('Pressing $BUTTON every $WAIT_TIME seconds', 'example', 'Pressing button')" | /home/jarrod/.talon/bin/repl
+        sleep 1
         # Start pressing enter every two seconds
         if [ -z "$pid" ]; then
             # Start a background process
             (
                 while true; do
                     # Simulate pressing 'Enter'. Use 'xdotool' for GUI applications or 'input' for terminal
-                    xdotool key Return  # For GUI applications
+                    xdotool key $BUTTON  # For GUI applications
                     # input keyevent 66  # For terminal applications, may require root or specific permissions
-                    sleep 2  # Wait for 2 seconds before the next press
+                    sleep $WAIT_TIME  # Wait for 2 seconds before the next press
                 done
             ) &
             # Store the PID of the background process
             pid=$!
         fi
-    elif [[ $line == *"type 1 (EV_KEY), code 305 (BTN_EAST), value 0"* ]]; then
+    elif [[ $line == *"type 3 (EV_ABS), code 17 (ABS_HAT0Y), value 0"* ]]; then
         # Stop pressing enter
+        echo "actions.user.hud_disable_id('Text panel')" | /home/jarrod/.talon/bin/repl
         if [ ! -z "$pid" ]; then
             # Kill the background process
             kill $pid
