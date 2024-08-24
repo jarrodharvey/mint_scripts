@@ -55,12 +55,22 @@ do
         echo "actions.speech.toggle(False)" | /home/jarrod/.talon/bin/repl
     fi
     if [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 1"* ]]; then
-        #xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' -1.0
-        xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed' -1.0
+        echo "actions.user.full_grid_place_window()" | /home/jarrod/.talon/bin/repl
+        echo "actions.user.full_grid_activate()" | /home/jarrod/.talon/bin/repl
+        echo "actions.user.game_stop()" | /home/jarrod/.talon/bin/repl
     elif [[ $line == *"type 1 (EV_KEY), code 314 (BTN_SELECT), value 0"* ]]; then
-        #xinput set-prop 'RP2040 HID Remapper QP1K Mouse' 'libinput Accel Speed' 1.0
-        xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed' 1.0
+        echo "actions.user.full_grid_close()" | /home/jarrod/.talon/bin/repl
     fi
+
+    if [[ $line == *"type 1 (EV_KEY), code 304 (BTN_SOUTH), value 1"* ]]; then
+        echo "actions.speech.toggle(True)" | /home/jarrod/.talon/bin/repl
+        echo "mimic('game mode')" | /home/jarrod/.talon/bin/repl
+    elif [[ $line == *"type 1 (EV_KEY), code 304 (BTN_SOUTH), value 0"* ]]; then
+        echo "mimic('command mode')" | /home/jarrod/.talon/bin/repl
+        echo "actions.speech.toggle(False)" | /home/jarrod/.talon/bin/repl 
+    fi
+
+
 
     if [[ $line == *"type 1 (EV_KEY), code 305 (BTN_EAST), value 1"* ]]; then
 
@@ -77,7 +87,7 @@ do
             (
                 while true; do
                     # Simulate pressing 'Enter'. Use 'xdotool' for GUI applications or 'input' for terminal
-                    xdotool key $BUTTON  # For GUI applications
+                    xdotool keydown $BUTTON; sleep 0.05; xdotool keyup $BUTTON
                     # input keyevent 66  # For terminal applications, may require root or specific permissions
                     sleep $WAIT_TIME  # Wait for 2 seconds before the next press
                 done

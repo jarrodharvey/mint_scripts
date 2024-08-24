@@ -12,7 +12,7 @@ fi
 
 sniper="xinput set-prop 'RP2040 HID Remapper UBPK Mouse' 'libinput Accel Speed'"
 space="type 1 (EV_KEY), code 194 (KEY_F24), value"
-escape="type 1 (EV_KEY), code 72 (KEY_KP8), value"
+escape="type 1 (EV_KEY), code 189 (KEY_F19), value"
 tab="type 1 (EV_KEY), code 192 (KEY_F22), value"
 
 sudo evtest "$device" | while read line
